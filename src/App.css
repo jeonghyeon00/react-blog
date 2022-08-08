@@ -56,6 +56,10 @@ div {
 }
 
 .modal {
+  position: absolute;
+  top: 400px;
+  left: 300px;
+  width: 500px;
   margin-top: 20px;
   padding: 20px;
   background: #eee;

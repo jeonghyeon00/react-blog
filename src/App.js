@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-key */
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import "./App.css";
 
@@ -7,73 +9,55 @@ function App() {
     "남양주 맛집",
     "코틀린 스프링부트",
   ]);
-  let [like, changeLike] = useState(0);
+  let [like, changeLike] = useState([0, 0, 0]);
+
   let [modal, setModal] = useState(false);
-  const blogName = "정현 블로그";
+  let [modalPost, setModalPost] = useState(0);
+  const blogName = "정현 React 블로그";
 
   return (
     <div className="App">
       <div className="black-nav">
         <h4>{blogName}</h4>
       </div>
-      <div className="list">
-        <h4
-          onClick={() => {
-            setModal(!modal);
-          }}
-        >
-          {title[0]}
-          <span
-            onClick={() => {
-              changeLike(like + 1);
-            }}
-          >
-            <br></br>👍 &nbsp; {like}
-          </span>
-          <br></br>
-          <button
-            onClick={() => {
-              let copy = [...title];
-              copy[0] = "글 제목 변경";
-              changeTitle(copy);
-            }}
-          >
-            글 제목 변경
-          </button>
-        </h4>
-        <p>8월 8일 발행</p>
-      </div>
-      <div className="list">
-        <h4
-          onClick={() => {
-            setModal(!modal);
-          }}
-        >
-          {title[1]}
-        </h4>
-        <p>8월 8일 발행</p>
-      </div>
-      <div className="list">
-        <h4
-          onClick={() => {
-            setModal(!modal);
-          }}
-        >
-          {title[2]}
-        </h4>
-        <p>8월 8일 발행</p>
-      </div>
-      {modal == true ? <Modal /> : null}
+      {title.map((title, i) => {
+        return (
+          <div className="list" key={i}>
+            <h4>
+              <h4
+                onClick={() => {
+                  setModal(!modal);
+                  setModalPost(i);
+                }}
+              >
+                {title} &nbsp;
+              </h4>
+              <span
+                onClick={() => {
+                  let copyLike = [...like];
+                  copyLike[i] = copyLike[i] + 1;
+                  changeLike(copyLike);
+                }}
+              >
+                👍 {like[i]}
+              </span>
+              <p>8월 8일 게시</p>
+            </h4>
+          </div>
+        );
+      })}
+
+      {modal == true ? <Modal title={title} setModalPost={modalPost} /> : null}
     </div>
   );
 }
 
-function Modal() {
+function Modal(props) {
   return (
     <div className="modal">
-      <h4>제목</h4>
-      <h4>작성 날짜</h4>
-      <h4>상세 내용</h4>
+      <h4>제목 : {props.title}</h4>
+      <h4>작성 날짜 :</h4>
+      <h4>상세 내용 :</h4>
     </div>
   );
 }
