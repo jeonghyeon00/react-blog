@@ -5,22 +5,22 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  let [title, changeTitle] = useState([
+  let [title, setTitle] = useState([
     "서울 맛집",
     "남양주 맛집",
     "코틀린 스프링부트",
   ]);
-  let [createdDate, changeDate] = useState([
+  let [createdDate, setDate] = useState([
     "2022-08-04",
     "2022-08-06",
     "2022-08-08",
   ]);
-  let [content, changeContent] = useState([
+  let [content, setContent] = useState([
     "잠실 맛집, 바이킹스워프",
     "약수촌, 광릉불고기",
     "Kotlin + Spring Boot + Jpa",
   ]);
-  let [like, changeLike] = useState([0, 0, 0]);
+  let [like, setLike] = useState([0, 0, 0]);
 
   let [modal, setModal] = useState(false);
   let [modalPost, setModalPost] = useState(0);
@@ -31,7 +31,7 @@ function App() {
       <div className="black-nav">
         <h4>{blogName}</h4>
       </div>
-      {title.map((title, i) => {
+      {title.map((mapTitle, i) => {
         return (
           <div className="list" key={i}>
             <h4>
@@ -43,18 +43,34 @@ function App() {
                   console.log(modalPost);
                 }}
               >
-                {title} &nbsp;
+                {mapTitle} &nbsp;
               </h4>
               <span
                 onClick={() => {
                   let copyLike = [...like];
                   copyLike[i] = copyLike[i] + 1;
-                  changeLike(copyLike);
+                  setLike(copyLike);
                 }}
               >
                 👍 {like[i]}
               </span>
               <p>{createdDate[i]}</p>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  let copyTitle = [...title];
+                  copyTitle.splice(i, 1);
+                  setTitle(copyTitle);
+                  let copyDate = [...createdDate];
+                  copyDate.splice(i, 1);
+                  setDate(copyDate);
+                  let copyContent = [...content];
+                  copyContent.splice(i, 1);
+                  setContent(copyContent);
+                }}
+              >
+                ❌
+              </button>
             </h4>
           </div>
         );
