@@ -76,16 +76,25 @@ function App() {
         />
       ) : null}
       <div>
-        <input
-          onChange={(e) => {
-            setTitleInput(e.target.value);
-          }}
-        />
-        <input
-          onChange={(e) => {
-            setContentInput(e.target.value);
-          }}
-        />
+        <p>
+          제목 : &nbsp;
+          <input
+            onChange={(e) => {
+              setTitleInput(e.target.value);
+            }}
+            style={{ width: "200px" }}
+          />
+        </p>
+        <p>
+          내용 : &nbsp;
+          <input
+            onChange={(e) => {
+              setContentInput(e.target.value);
+            }}
+            style={{ width: "300px", height: "100px" }}
+          />
+        </p>
+
         <button
           onClick={() => {
             let titleCopy = [...title];
