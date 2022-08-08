@@ -8,6 +8,7 @@ function App() {
     "코틀린 스프링부트",
   ]);
   let [like, changeLike] = useState(0);
+  let [modal, setModal] = useState(false);
   const blogName = "정현 블로그";
 
   return (
@@ -16,7 +17,11 @@ function App() {
         <h4>{blogName}</h4>
       </div>
       <div className="list">
-        <h4>
+        <h4
+          onClick={() => {
+            setModal(!modal);
+          }}
+        >
           {title[0]}
           <span
             onClick={() => {
@@ -39,14 +44,26 @@ function App() {
         <p>8월 8일 발행</p>
       </div>
       <div className="list">
-        <h4>{title[1]}</h4>
+        <h4
+          onClick={() => {
+            setModal(!modal);
+          }}
+        >
+          {title[1]}
+        </h4>
         <p>8월 8일 발행</p>
       </div>
       <div className="list">
-        <h4>{title[2]}</h4>
+        <h4
+          onClick={() => {
+            setModal(!modal);
+          }}
+        >
+          {title[2]}
+        </h4>
         <p>8월 8일 발행</p>
       </div>
-      <Modal></Modal>
+      {modal == true ? <Modal /> : null}
     </div>
   );
 }
