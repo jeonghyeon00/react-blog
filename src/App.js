@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 import { useState } from "react";
@@ -8,6 +9,16 @@ function App() {
     "서울 맛집",
     "남양주 맛집",
     "코틀린 스프링부트",
+  ]);
+  let [createdDate, changeDate] = useState([
+    "2022-08-04",
+    "2022-08-06",
+    "2022-08-08",
+  ]);
+  let [content, changeContent] = useState([
+    "잠실 맛집, 바이킹스워프",
+    "약수촌, 광릉불고기",
+    "Kotlin + Spring Boot + Jpa",
   ]);
   let [like, changeLike] = useState([0, 0, 0]);
 
@@ -27,7 +38,9 @@ function App() {
               <h4
                 onClick={() => {
                   setModal(!modal);
+                  console.log(modalPost);
                   setModalPost(i);
+                  console.log(modalPost);
                 }}
               >
                 {title} &nbsp;
@@ -41,13 +54,20 @@ function App() {
               >
                 👍 {like[i]}
               </span>
-              <p>8월 8일 게시</p>
+              <p>{createdDate[i]}</p>
             </h4>
           </div>
         );
       })}
 
-      {modal == true ? <Modal title={title} setModalPost={modalPost} /> : null}
+      {modal == true ? (
+        <Modal
+          title={title}
+          modalPost={modalPost}
+          createdDate={createdDate}
+          content={content}
+        />
+      ) : null}
     </div>
   );
 }
@@ -55,9 +75,9 @@ function App() {
 function Modal(props) {
   return (
     <div className="modal">
-      <h4>제목 : {props.title}</h4>
-      <h4>작성 날짜 :</h4>
-      <h4>상세 내용 :</h4>
+      <h4>제목 : {props.title[props.modalPost]}</h4>
+      <h4>작성 날짜 : {props.createdDate[props.modalPost]}</h4>
+      <h4>상세 내용 : {props.content[props.modalPost]}</h4>
     </div>
   );
 }
