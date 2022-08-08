@@ -2,25 +2,16 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import moment from "moment";
 import "./App.css";
 
 function App() {
-  let [title, setTitle] = useState([
-    "서울 맛집",
-    "남양주 맛집",
-    "코틀린 스프링부트",
-  ]);
-  let [createdDate, setDate] = useState([
-    "2022-08-04",
-    "2022-08-06",
-    "2022-08-08",
-  ]);
-  let [content, setContent] = useState([
-    "잠실 맛집, 바이킹스워프",
-    "약수촌, 광릉불고기",
-    "Kotlin + Spring Boot + Jpa",
-  ]);
-  let [like, setLike] = useState([0, 0, 0]);
+  let [titleInput, setTitleInput] = useState("");
+  let [contentInput, setContentInput] = useState("");
+  let [title, setTitle] = useState([]);
+  let [createdDate, setDate] = useState([]);
+  let [content, setContent] = useState([]);
+  let [like, setLike] = useState([]);
 
   let [modal, setModal] = useState(false);
   let [modalPost, setModalPost] = useState(0);
@@ -84,6 +75,37 @@ function App() {
           content={content}
         />
       ) : null}
+      <div>
+        <input
+          onChange={(e) => {
+            setTitleInput(e.target.value);
+          }}
+        />
+        <input
+          onChange={(e) => {
+            setContentInput(e.target.value);
+          }}
+        />
+        <button
+          onClick={() => {
+            let titleCopy = [...title];
+            titleCopy.unshift(titleInput);
+            setTitle(titleCopy);
+            let likeCopy = [...like];
+            likeCopy.unshift(0);
+            setLike(likeCopy);
+            let dateCopy = [...createdDate];
+            const nowTime = moment().format("YYYY-MM-DD");
+            dateCopy.unshift(nowTime);
+            setDate(dateCopy);
+            let contentCopy = [...content];
+            contentCopy.unshift(contentInput);
+            setContent(contentCopy);
+          }}
+        >
+          게시글 추가
+        </button>
+      </div>
     </div>
   );
 }
