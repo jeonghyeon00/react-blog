@@ -23,8 +23,9 @@ function App() {
               changeLike(like + 1);
             }}
           >
-            👍 {like}
+            <br></br>👍 &nbsp; {like}
           </span>
+          <br></br>
           <button
             onClick={() => {
               let copy = [...title];
@@ -45,6 +46,17 @@ function App() {
         <h4>{title[2]}</h4>
         <p>8월 8일 발행</p>
       </div>
+      <Modal></Modal>
+    </div>
+  );
+}
+
+function Modal() {
+  return (
+    <div className="modal">
+      <h4>제목</h4>
+      <h4>작성 날짜</h4>
+      <h4>상세 내용</h4>
     </div>
   );
 }
